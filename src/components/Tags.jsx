@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 
 export default function Tags() {
   const [tags, setTags] = useState('');
-  const [gif, setGif] = useState('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNrOHZtZzdnMXgydGQzeW9qbDJjdThvMjQ2a2d4YWhlbjU1dzY5YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1qXc2onDaFpoHTgvHA/giphy.gif'); // ✅ default home gif
+  const [gif, setGif] = useState(
+    'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDNrOHZtZzdnMXgydGQzeW9qbDJjdThvMjQ2a2d4YWhlbjU1dzY5YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1qXc2onDaFpoHTgvHA/giphy.gif'
+  ); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -11,7 +13,7 @@ export default function Tags() {
   const apiurl = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}&tag=${tags}`;
 
   const fetchData = async () => {
-    if (tags.trim() === '') return; // ✅ don’t fetch if input is empty
+    if (tags.trim() === '') return;
     setLoading(true);
     setError('');
     try {
@@ -34,10 +36,6 @@ export default function Tags() {
     }
   };
 
-  useEffect(() => {
-    
-  }, []);
-
   function clickHandler() {
     fetchData();
   }
@@ -46,9 +44,31 @@ export default function Tags() {
     setTags(event.target.value);
   }
 
+  // 🔗 Share Functions
+  const shareOnWhatsApp = () => {
+    window.open(`https://api.whatsapp.com/send?text=Check this GIF! ${gif}`, "_blank");
+  };
+
+  const shareOnTwitter = () => {
+    window.open(`https://twitter.com/intent/tweet?text=Check this GIF! ${gif}`, "_blank");
+  };
+
+  const shareOnTelegram = () => {
+    window.open(`https://t.me/share/url?url=${gif}&text=Check this GIF!`, "_blank");
+  };
+
+  const shareOnFacebook = () => {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${gif}`, "_blank");
+  };
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(gif);
+    alert("GIF link copied to clipboard!");
+  };
+
   return (
     <div className="max-w-sm mt-5 mx-auto bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center space-y-4">
-      <h1 className="text-2xl font-bold text-gray-800">GIF</h1>
+      <h1 className="text-2xl font-bold text-gray-800">GIF Search</h1>
 
       {loading ? (
         <div className="w-full h-64 flex items-center justify-center">
@@ -87,6 +107,20 @@ export default function Tags() {
       >
         Generate
       </button>
+
+      {/* 🔗 Share Buttons */}
+      {gif && (
+        <div className="flex flex-wrap gap-3 justify-center mt-4">
+          <button onClick={shareOnWhatsApp} className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600">WhatsApp</button>
+          <button onClick={shareOnTwitter} className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600">Twitter</button>
+          <button onClick={shareOnTelegram} className="px-3 py-1 rounded bg-sky-500 text-white hover:bg-sky-600">Telegram</button>
+          <button onClick={shareOnFacebook} className="px-3 py-1 rounded bg-indigo-600 text-white hover:bg-indigo-700">Facebook</button>
+          <button onClick={copyLink} className="px-3 py-1 rounded bg-gray-700 text-white hover:bg-gray-800">Copy Link</button>
+        </div>
+      )}
     </div>
   );
 }
+
+
+
