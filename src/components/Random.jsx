@@ -6,7 +6,7 @@ export default function Random() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(''); 
 
-  const API_KEY = import.meta.env.VITE_GIF_MINI_PROJECT;
+  const API_KEY = import.meta.env.VITE_RANDOM_GIF;
   const apiurl = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
 
   const fetchData = async () => {
