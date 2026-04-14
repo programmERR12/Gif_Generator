@@ -16,7 +16,7 @@
 
 ### 🔹 Portfolio
 
-* 📌 Description: Built a responsive personal portfolio website using React to highlight my projects, technical skills, and achievements with an interactive and user-friendly design.
+  * 📌 Description: GIF Generator is a web application built with React.js and Tailwind CSS that allows users to search and display GIFs instantly using the GIPHY API. It provides a responsive and user-friendly interface for finding GIFs by keyword, making conversations and social interactions more fun and expressive.
 * 🛠️ Tech Used:  React.js, HTML5, CSS3, JavaScript (ES6+)
 * 🔗 Live Demo: https://programmerr12.github.io/portfolio/
 
